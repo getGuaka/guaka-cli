@@ -35,7 +35,7 @@ public enum DirectoryUtilities {
     var path = ""
 
     if
-      let firstChar = name.characters.first,
+      let firstChar = name.first,
       firstChar == "/" {
       path = name
     } else {

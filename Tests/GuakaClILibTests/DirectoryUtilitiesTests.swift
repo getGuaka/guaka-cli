@@ -65,7 +65,7 @@ class DirectoryUtilitiesTests: XCTestCase {
     GuakaCliConfig.dir = MockDirectoryType.self
 
     do {
-      try DirectoryUtilities.currentDirectory(forName: "/some/root/path")
+      _ = try DirectoryUtilities.currentDirectory(forName: "/some/root/path")
     } catch GuakaError.wrongDirectoryGiven(let path) {
       XCTAssertEqual(path, "/some/root/path")
     } catch {
@@ -81,7 +81,7 @@ class DirectoryUtilitiesTests: XCTestCase {
     GuakaCliConfig.dir = MockDirectoryType.self
 
     do {
-      try DirectoryUtilities.currentDirectory(forName: "/some/root/path")
+      _ = try DirectoryUtilities.currentDirectory(forName: "/some/root/path")
     } catch GuakaError.wrongDirectoryGiven(let path) {
       XCTAssertEqual(path, "/some/root/path")
     } catch {
@@ -95,7 +95,7 @@ class DirectoryUtilitiesTests: XCTestCase {
     GuakaCliConfig.dir = MockDirectoryType.self
 
     do {
-      try DirectoryUtilities.currentDirectory(forName: "/some/root/path")
+      _ = try DirectoryUtilities.currentDirectory(forName: "/some/root/path")
     } catch GuakaError.wrongDirectoryGiven(let path) {
       XCTAssertEqual(path, "/some/root/path")
     } catch {

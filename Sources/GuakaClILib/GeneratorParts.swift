@@ -100,7 +100,7 @@ public enum GeneratorParts {
       line = "  rootCommand.add(subCommand: \(command))"
     }
 
-    let end = content.index(indexFound, offsetBy: comamndAddingPlaceholder.characters.count)
+    let end = content.index(indexFound, offsetBy: comamndAddingPlaceholder.count)
 
     let part1 = content[content.startIndex..<indexFound]
     let part2 = content[end..<content.endIndex]
@@ -117,7 +117,7 @@ public enum GeneratorParts {
       throw GuakaError.tooManyArgsPassed
     }
 
-    if name.characters.contains(" ") {
+    if name.contains(" ") {
       throw GuakaError.wrongCommandNameFormat(name)
     }
 
@@ -131,7 +131,7 @@ public enum GeneratorParts {
 
     case 1:
       let name = args.first!
-      if name.characters.contains(" ") {
+      if name.contains(" ") {
         throw GuakaError.wrongCommandNameFormat(name)
       }
       return name
