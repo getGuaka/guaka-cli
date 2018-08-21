@@ -1,15 +1,17 @@
+// swift-tools-version:4.0
 import PackageDescription
 
 let package = Package(
     name: "guaka-cli",
-    targets: [
-      Target(name: "guaka-cli", dependencies: ["GuakaClILib"]),
-      Target(name: "Swiftline"),
-      Target(name: "GuakaClILib", dependencies: ["Swiftline"]),
-    ],
     dependencies: [
-        .Package(url: "https://github.com/oarrabi/Guaka.git", majorVersion: 0),
-        .Package(url: "https://github.com/oarrabi/Env.git", majorVersion: 0),
-        .Package(url: "https://github.com/oarrabi/FileUtils.git", majorVersion: 0),
-    ]
+        .package(url: "https://github.com/nsomar/Guaka.git", from: "0.0.0"),
+        .package(url: "https://github.com/getGuaka/Env.git", from: "0.0.0"),
+        .package(url: "https://github.com/getGuaka/FileUtils.git", from: "0.0.0"),
+    ],
+    targets: [
+      .target(name: "guaka-cli", dependencies: ["GuakaClILib"]),
+      .target(name: "Swiftline"),
+      .target(name: "GuakaClILib", dependencies: ["Swiftline"]),
+    ],
+    swiftLanguageVersions: [4]
 )
