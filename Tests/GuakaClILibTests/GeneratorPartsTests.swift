@@ -11,7 +11,6 @@ import XCTest
 
 class GeneratorPartsTests: XCTestCase {
 
-
   func testGeneratesCommandFile() {
     let file = GeneratorParts.commandFile(forVarName: "test", commandName: "testit")
     XCTAssertEqual(file, "import Guaka\n\nvar testCommand = Command(\n  usage: \"testit\", configuration: configuration, run: execute)\n\n\nprivate func configuration(command: Command) {\n\n  command.add(flags: [\n    // Add your flags here\n    ]\n  )\n\n  // Other configurations\n}\n\nprivate func execute(flags: Flags, args: [String]) {\n  // Execute code here\n  print(\"testit called\")\n}\n")
@@ -132,5 +131,23 @@ class GeneratorPartsTests: XCTestCase {
       XCTFail()
     }
   }
-}
 
+  static let allTests = [
+    ("testGeneratesCommandFile", testGeneratesCommandFile),
+    ("testGeneratesPackageFile", testGeneratesPackageFile),
+    ("testGeneratesMainFile", testGeneratesMainFile),
+    ("testGeneratesSetupFile", testGeneratesSetupFile),
+    ("testUpdatesSetupWihtoutParentFile", testUpdatesSetupWihtoutParentFile),
+    ("testUpdatesSetupWihtParentFile", testUpdatesSetupWihtParentFile),
+    ("testItThrowsErrorIfCannotFindThePlaceholder", testItThrowsErrorIfCannotFindThePlaceholder),
+    ("testCanUpdateFileMultipleTimes", testCanUpdateFileMultipleTimes),
+    ("testItGetsNameIfCorrect", testItGetsNameIfCorrect),
+    ("testItThrowsErrorIfArgsIsEmpty", testItThrowsErrorIfArgsIsEmpty),
+    ("testItThrowsErrorIfMoreThan1ArgsArePassed", testItThrowsErrorIfMoreThan1ArgsArePassed),
+    ("testItThrowsErrorIfWrongNamePassed", testItThrowsErrorIfWrongNamePassed),
+    ("testItReturnsNilIfProjctNameIsEmpty", testItReturnsNilIfProjctNameIsEmpty),
+    ("testItReturnsNameIfProjectNameIsCorrect", testItReturnsNameIfProjectNameIsCorrect),
+    ("testItThrowsErrorIfProjectNameContainsSpaces", testItThrowsErrorIfProjectNameContainsSpaces),
+    ("testItThrowsErrorIfProjectReceivedTooManyArgs", testItThrowsErrorIfProjectReceivedTooManyArgs),
+  ]
+}

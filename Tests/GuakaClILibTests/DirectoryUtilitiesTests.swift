@@ -215,4 +215,21 @@ class DirectoryUtilitiesTests: XCTestCase {
     let s = try! DirectoryUtilities.paths(forName: "/some/root/path")
     XCTAssertEqual(s.rootDirectory, "/some/root/path")
   }
+
+  static let allTests = [
+    ("testReturnCurrentFolderIfNameIsNotProvidedExample", testReturnCurrentFolderIfNameIsNotProvidedExample),
+    ("testReturnCurrentPathPlusRelativePathExample", testReturnCurrentPathPlusRelativePathExample),
+    ("testReturnCurrentPathPlusNamePathExample", testReturnCurrentPathPlusNamePathExample),
+    ("testReturnAbsolutePathExample", testReturnAbsolutePathExample),
+    ("testReturnExceptionIfPathIsNotValud", testReturnExceptionIfPathIsNotValud),
+    ("testRetunrErrorIfPathIsFolderAndNonEmpty", testRetunrErrorIfPathIsFolderAndNonEmpty),
+    ("testReturnErrorIfPathDoesNotExist", testReturnErrorIfPathDoesNotExist),
+    ("testThrowsFolderIfFolderHasContent", testThrowsFolderIfFolderHasContent),
+    ("testTriesToCreateRootFolderIfNonExisting", testTriesToCreateRootFolderIfNonExisting),
+    ("testTriesToCreateSourcesFolderIfNonExisting", testTriesToCreateSourcesFolderIfNonExisting),
+    ("testThrowsErrorIfCreateRootFailed", testThrowsErrorIfCreateRootFailed),
+    ("testThrowsErrorIfCreateSourcesFailed", testThrowsErrorIfCreateSourcesFailed),
+    ("testFullSuccessfullRun", testFullSuccessfullRun),
+    ("testReturnThePathsForAFolder", testReturnThePathsForAFolder),
+  ]
 }

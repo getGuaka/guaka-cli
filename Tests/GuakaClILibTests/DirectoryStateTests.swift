@@ -48,4 +48,9 @@ class DirectoryStateTests: XCTestCase {
     XCTAssertEqual(val, DirectoryState.hasContent)
   }
 
+  static let allTests = [
+    ("testReturnNonExistanceDirectories", testReturnNonExistanceDirectories),
+    ("testReturnEmptyDirectories", testReturnEmptyDirectories),
+    ("testReturnHasContentDirectories", testReturnHasContentDirectories),
+  ]
 }
