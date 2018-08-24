@@ -52,16 +52,16 @@ extension StringStyle {
   }
   
   fileprivate func addCommandSeperators(_ string: String) -> String {
-    var rangeWithInset = (string.characters.index(after: string.startIndex) ..< string.characters.index(before: string.endIndex))
+    var rangeWithInset = (string.index(after: string.startIndex) ..< string.index(before: string.endIndex))
 
     let newString = string.replacing(subString: startOfCode, withString: ";", inRange: rangeWithInset)
     
-    rangeWithInset = (newString.characters.index(after: newString.startIndex) ..< newString.characters.index(before: newString.endIndex))
+    rangeWithInset = (newString.index(after: newString.startIndex) ..< newString.index(before: newString.endIndex))
     return newString.replacing(subString: "m;", withString: ";", inRange: rangeWithInset)
   }
   
   fileprivate func removeEndingCode(_ string: String) -> String {
-    let rangeWithInset = (string.characters.index(after: string.startIndex) ..< string.endIndex)
+    let rangeWithInset = (string.index(after: string.startIndex) ..< string.endIndex)
     return string.replacing(subString: endingColorCode(), withString: "", inRange: rangeWithInset)
   }
   
@@ -77,7 +77,7 @@ extension String {
     var mutableStr = self
 
     while let startIndex = mutableStr.find(string: subString) {
-      let endIndex = mutableStr.index(startIndex, offsetBy: subString.characters.count)
+      let endIndex = mutableStr.index(startIndex, offsetBy: subString.count)
       mutableStr.replaceSubrange(startIndex..<endIndex, with: withString)
     }
 
@@ -87,7 +87,7 @@ extension String {
   func replacing(subString: String, withString: String, inRange range: Range<String.Index>) -> String {
     let beforeString = self[self.startIndex..<range.lowerBound]
     let afterString = self[range.upperBound..<self.endIndex]
-    let strToReplace = self[range]
+    let strToReplace = String(self[range])
 
     return "\(beforeString)\(strToReplace.replacing(subString: subString, withString: withString))\(afterString)"
   }

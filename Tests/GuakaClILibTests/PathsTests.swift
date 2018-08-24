@@ -136,5 +136,19 @@ class PathsTests: XCTestCase {
     let p = Paths.currentPaths
     XCTAssertEqual(p.isGuakaDirectory, false)
   }
-  
+
+  static let allTests = [
+    ("testGenerateSourcePathExample", testGenerateSourcePathExample),
+    ("testGetsPackagesFile", testGetsPackagesFile),
+    ("testGetsMainSwiftFile", testGetsMainSwiftFile),
+    ("testGetsSetupSwiftFile", testGetsSetupSwiftFile),
+    ("testGetsPathForSwiftFile", testGetsPathForSwiftFile),
+    ("testGetsProjectName", testGetsProjectName),
+    ("testReturnCurrentPaths", testReturnCurrentPaths),
+    ("testItChecksIfCurrentIsGuaka", testItChecksIfCurrentIsGuaka),
+    ("testReturnFalseForGuakaIfSourcesNotThere", testReturnFalseForGuakaIfSourcesNotThere),
+    ("testReturnFalseForGuakaIfPackageNotThere", testReturnFalseForGuakaIfPackageNotThere),
+    ("testReturnFalseForGuakaIfSetupNotThere", testReturnFalseForGuakaIfSetupNotThere),
+    ("testReturnFalseForGuakaIfMainNotThere", testReturnFalseForGuakaIfMainNotThere),
+  ]
 }

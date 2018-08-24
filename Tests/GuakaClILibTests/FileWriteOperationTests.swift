@@ -281,4 +281,23 @@ class FileWriteOperationTests: XCTestCase {
     }
 
   }
+
+  static let allTests = [
+    ("testCreateNewWriteOperationsWithPackage", testCreateNewWriteOperationsWithPackage),
+    ("testCreateNewWriteOperationsWithMain", testCreateNewWriteOperationsWithMain),
+    ("testCreateNewWriteOperationsWithRoot", testCreateNewWriteOperationsWithRoot),
+    ("testCreateNewWriteOperationsWithSetup", testCreateNewWriteOperationsWithSetup),
+    ("testItWritesAFile", testItWritesAFile),
+    ("testItThrowsItFailedToWriteFile", testItThrowsItFailedToWriteFile),
+    ("testItWritesAllFilesForNewProject", testItWritesAllFilesForNewProject),
+    ("testIfAnyFailsTheOperationFails", testIfAnyFailsTheOperationFails),
+    ("testCanPerformUpdateOperations", testCanPerformUpdateOperations),
+    ("testReturnExceptionIfCannotRead", testReturnExceptionIfCannotRead),
+    ("testItReturnExceptionIfCannotWriteUpdatedFile", testItReturnExceptionIfCannotWriteUpdatedFile),
+    ("testCreateAddCommandOperationsWithCommand", testCreateAddCommandOperationsWithCommand),
+    ("testCreateAddCommandOperationsWithSetup", testCreateAddCommandOperationsWithSetup),
+    ("testItUpdatesTheSetupFileWithNoParent", testItUpdatesTheSetupFileWithNoParent),
+    ("testItUpdatesTheSetupFileWithParent", testItUpdatesTheSetupFileWithParent),
+    ("testItFailsToUpdateIfCannotReadSetupFileContent", testItFailsToUpdateIfCannotReadSetupFileContent),
+  ]
 }

@@ -11,7 +11,7 @@ Read more about Guaka:
 
 ### macOS
 
-You can install the Guaka generator CLI application in macOS with homebrew
+You can install the Guaka generator CLI application in macOS with Homebrew:
 
 ```
 brew install getguaka/tap/guaka
@@ -20,22 +20,24 @@ brew install getguaka/tap/guaka
 Alternatively, you can install it using the installer script:
 
 ```
-curl https://raw.githubusercontent.com/getGuaka/Guaka-Generator/master/scripts/install.sh -sSf | bash
+curl https://raw.githubusercontent.com/getGuaka/guaka-cli/master/scripts/install.sh -sSf | bash
 ```
 
-Lastly you can install it by copying the binary from github and placing it in your path.    
-Go to [https://github.com/getGuaka/Guaka-Generator/releases](https://github.com/getGuaka/Guaka-Generator/releases)
+Lastly you can install it by copying the binary from GitHub and placing it in
+your path.  Download the binary from
+[https://github.com/getGuaka/guaka-cli/releases](https://github.com/getGuaka/guaka-cli/releases)
 
 ### GNU/Linux
 
 If you are on GNU/Linux you can run the installer script:
 
 ```
-curl https://raw.githubusercontent.com/getguaka/Guaka-Generator/master/scripts/install.sh -sSf | bash
+curl https://raw.githubusercontent.com/getguaka/guaka-cli/master/scripts/install.sh -sSf | bash
 ```
 
-Alternatively, You can install it by copying the binary from github and placing it in your path.   
- Go to [https://github.com/getGuaka/Guaka-Generator/releases](https://github.com/getGuaka/Guaka-Generator/releases)
+Alternatively, you can install it by copying the binary from GitHub and placing
+it in your path.  Donwload the binary from
+[https://github.com/getGuaka/guaka-cli/releases](https://github.com/getGuaka/guaka-cli/releases)
 
 ### Build from source
 

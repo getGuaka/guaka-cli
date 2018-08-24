@@ -65,7 +65,7 @@ class DirectoryUtilitiesTests: XCTestCase {
     GuakaCliConfig.dir = MockDirectoryType.self
 
     do {
-      try DirectoryUtilities.currentDirectory(forName: "/some/root/path")
+      _ = try DirectoryUtilities.currentDirectory(forName: "/some/root/path")
     } catch GuakaError.wrongDirectoryGiven(let path) {
       XCTAssertEqual(path, "/some/root/path")
     } catch {
@@ -81,7 +81,7 @@ class DirectoryUtilitiesTests: XCTestCase {
     GuakaCliConfig.dir = MockDirectoryType.self
 
     do {
-      try DirectoryUtilities.currentDirectory(forName: "/some/root/path")
+      _ = try DirectoryUtilities.currentDirectory(forName: "/some/root/path")
     } catch GuakaError.wrongDirectoryGiven(let path) {
       XCTAssertEqual(path, "/some/root/path")
     } catch {
@@ -95,7 +95,7 @@ class DirectoryUtilitiesTests: XCTestCase {
     GuakaCliConfig.dir = MockDirectoryType.self
 
     do {
-      try DirectoryUtilities.currentDirectory(forName: "/some/root/path")
+      _ = try DirectoryUtilities.currentDirectory(forName: "/some/root/path")
     } catch GuakaError.wrongDirectoryGiven(let path) {
       XCTAssertEqual(path, "/some/root/path")
     } catch {
@@ -215,4 +215,21 @@ class DirectoryUtilitiesTests: XCTestCase {
     let s = try! DirectoryUtilities.paths(forName: "/some/root/path")
     XCTAssertEqual(s.rootDirectory, "/some/root/path")
   }
+
+  static let allTests = [
+    ("testReturnCurrentFolderIfNameIsNotProvidedExample", testReturnCurrentFolderIfNameIsNotProvidedExample),
+    ("testReturnCurrentPathPlusRelativePathExample", testReturnCurrentPathPlusRelativePathExample),
+    ("testReturnCurrentPathPlusNamePathExample", testReturnCurrentPathPlusNamePathExample),
+    ("testReturnAbsolutePathExample", testReturnAbsolutePathExample),
+    ("testReturnExceptionIfPathIsNotValud", testReturnExceptionIfPathIsNotValud),
+    ("testRetunrErrorIfPathIsFolderAndNonEmpty", testRetunrErrorIfPathIsFolderAndNonEmpty),
+    ("testReturnErrorIfPathDoesNotExist", testReturnErrorIfPathDoesNotExist),
+    ("testThrowsFolderIfFolderHasContent", testThrowsFolderIfFolderHasContent),
+    ("testTriesToCreateRootFolderIfNonExisting", testTriesToCreateRootFolderIfNonExisting),
+    ("testTriesToCreateSourcesFolderIfNonExisting", testTriesToCreateSourcesFolderIfNonExisting),
+    ("testThrowsErrorIfCreateRootFailed", testThrowsErrorIfCreateRootFailed),
+    ("testThrowsErrorIfCreateSourcesFailed", testThrowsErrorIfCreateSourcesFailed),
+    ("testFullSuccessfullRun", testFullSuccessfullRun),
+    ("testReturnThePathsForAFolder", testReturnThePathsForAFolder),
+  ]
 }
