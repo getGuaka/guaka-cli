@@ -5,7 +5,7 @@ install:
 test:
 	bash scripts/test.sh
 
-test-darwin:
+test-darwin: generate
 	xcodebuild -project guaka-cli.xcodeproj -scheme guaka-cli-Package build test
 
 test-linux:
