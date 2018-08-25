@@ -1,6 +1,6 @@
 [ -z ${VERSION+x} ] && { echo "VERSION is missing"; exit 1; }
 
-FOLDER=guaka-generator-${VERSION}-darwin-X64
+FOLDER=guaka-${VERSION}-darwin-x86_64
 FILE=${FOLDER}.tar.bz2
 
 if [ ! -f release/${FOLDER}/${FILE} ]; then
