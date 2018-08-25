@@ -66,7 +66,7 @@ publish-local-darwin:
 build-linux-docker:
 	@echo "Runs release-linux-local inside a docker image"
 	@echo "The built file is located at bin/linux/guaka"
-	docker-compose run -w /work swift
+	docker run --volume `pwd`:`pwd` --workdir `pwd` swift:4.1.3 make release-linux-local
 	@echo "\nLinux version built at bin/linux/guaka\n"
 
 build-all-local: clone-swiftline clean build-linux-docker build-project-darwin
