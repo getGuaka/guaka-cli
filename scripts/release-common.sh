@@ -30,5 +30,4 @@ release() {
     RELEASE_TARBALL=$RELEASE.tar.bz2
 
     build_tarball RELEASE_TARBALL_PATH $RELEASE $BINARY
-    github-release upload --user getGuaka --security-token ${GITHUB_TOKEN} --repo guaka-cli --tag ${VERSION} --name $RELEASE_TARBALL --file $RELEASE_TARBALL_PATH
 }
