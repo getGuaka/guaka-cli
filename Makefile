@@ -91,8 +91,8 @@ release-publish-local:
 	make publish-local
 
 release-and-deploy:
-	if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then make build-project-darwin release-darwin VERSION=${TRAVIS_TAG} ; fi
-	if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make build-project-linux release-linux VERSION=${TRAVIS_TAG} ; fi
+	if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then make build-project-darwin release-darwin VERSION=${TRAVIS_TAG} ; fi
+	if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then make build-project-linux release-linux VERSION=${TRAVIS_TAG} ; fi
 
 sha256:
 	@shasum -a 256 bin/guaka | cut -f 1 -d " "
