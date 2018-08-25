@@ -18,7 +18,6 @@ build_tarball() {
 # $1 The version to be released
 # $2 The plaform: linux | darwin.
 # $3 binary artifact to be released.
-# $4 Github token.
 release() {
     VERSION=$1
     PLATFORM=$2
