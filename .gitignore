@@ -197,3 +197,7 @@ Packages/
 ### Objective-C Patch ###
 .DS_STORE
 0
+
+# Build artifacts
+bin/
+release/

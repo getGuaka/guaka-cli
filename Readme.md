@@ -1,5 +1,9 @@
 # Guaka Generator
 
+[![Build Status](https://travis-ci.com/getGuaka/guaka-cli.svg?branch=master)](https://travis-ci.com/getGuaka/guaka-cli)
+[![codecov](https://codecov.io/gh/getGuaka/guaka-cli/branch/master/graph/badge.svg)](https://codecov.io/gh/getGuaka/guaka-cli)
+![Platforms](https://img.shields.io/badge/platform-macos%20|%20linux-lightgrey.svg)
+
 Guaka command line application generator app.
 
 Read more about Guaka:

@@ -4,27 +4,28 @@ os:
 sudo: required
 dist: trusty
 osx_image: xcode9.4.1
-language: node_js
-
+services:
+- docker
 script:
-  - make test
-
+- make test
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
-
+- bash <(curl -s https://codecov.io/bash)
 install:
-  - eval "$(curl -sL https://gist.githubusercontent.com/kylef/5c0475ff02b7c7671d2a/raw/9f442512a46d7a2af7b850d65a7e9bd31edfb09b/swiftenv-install.sh)"
-  - go get github.com/aktau/github-release
-  - export PATH="$PATH:$GOBIN"
-
+- eval "$(curl -sL https://gist.githubusercontent.com/kylef/5c0475ff02b7c7671d2a/raw/9f442512a46d7a2af7b850d65a7e9bd31edfb09b/swiftenv-install.sh)"
+- go get github.com/aktau/github-release
+- export PATH="$PATH:$GOBIN"
+before_deploy:
+- make release-and-deploy
 deploy:
-  provider: script
-  script:
-    - make release-and-deploy
+  provider: releases
+  api_key:
+    secure: j7oAjY6NB2ENoYQJL2y6wTOazpFraVpAKH+sdAp+eM+OI4XNNuahZCNlXngDztGgUKrii1hH76LI5dBzMdKv+iCSefS3UPDStGT4V+K8JbWAb8ZCaJr33wMJCSFYtEqEisOBr43LOiqPk87zLXdl7gDtOgJj68CyI2bYAdxMBgCal40SFETnuV1i6Egy1LNJ9KRzpIMu+163eALHzfdREO0mpnLVOu7wkDuyCUzsjp1JO1OD8GYYlExa9qF15Za8qaMA1RbpQotbREp/eTC5ekbnaZHfXV3tUC7z7u1IKMNPQI9yNM4auzNNFU+bHRFq3U9JLYB6FOb3hA73MaeGf2II70pVukbrFEkaarDWeLD1uXXvWt1YUJVTHNMjoUnsPQeNc2krdwXtPGxPOQXnikURtnC/LduEksRvzxEUpDGSschlDRjK1RLnQcU3dampRNXzOLL52HWcg3ArKq808gOPkTqcCDvznM6FvaTpZs2A2cT3tXXQAZs/Dvk5Q2I/K+hCaOq8BjSibtiM/u1BFN1b27IfeUovKZGVR4tZutjI+mET43Qw08gP9yCljtxAju9PSaUJomi9KCZuiedd3Mh/Qhtq6ZjDrUgfYEI/ibuSKo3K9spyF3mevhjyhZ8//ysc+FgdfLbnX7wmm3yCu3FBntqvl1BRz4+6d24HfHo=
+  file: release/*/*.bz2
   on:
     tags: true
+    repo: getGuaka/guaka-cli
 env:
   global:
-    - GOPATH=~/go
-    - GOBIN=~/go/bin
-    - secure: CK8UAjG6OZv6sdFF+ghJyoo9n3PK6XlqH9f1Nt8mxmSkkcmprbUsrwIEdcheZvUUC4I7cR1dCwCgqXbB3Ik7CmRTWjv4ZLoJnbLNXRvNlpu7wzEq/pSD4VmdbssSMGK5yP0EMbU+RzZnVmsNMdu7OiSuca/UHihSUbIMYLoInQOo77+6ZpYznjtpWijTZBVGCB6ETBxXn2L0dx2mjOmS2Ti1FRZko0Y1KjqU+GIbEfjo0LJUOI2Olr0+R+eax0ezkLT4xYycoaWBNwxauqQlUToVnCOlCm97QdaGjT0t0Xy4UVCkByBw42VG8oRPRCHicRcVB+SJr1DDY/KrfmQSV7DPEn2XSE4bCwvaaIOal94o1zMZ5mgdrD8UialvNq0wVhlsIQ1Cdvq7i7EXXQ5FpjR788nexlIer0dW9Qoy5mMy0tN1hxbTE3/E/GibqZG5+jqx1EHEMhOzNTWa4LtETzV++9ESGPYO3iQSxRRi4mzOrPeg8BfGfTbpZZXVOKAUkC5YgSJZPVQ1/juZOaAlJ7d8MKdx/GcELqLvLOh9Yx03/5Or6Em+M24UxPXjoNi0w/cDlrsGP2Ye85v4MhVJgP0RcCaY6bJWxsF9gngOqEnmKFh1idbDvWmcoi3rpr8CtbmtA9QzJWgY3qxxHDAmH2Wmg0BRN4gclxBe86TsGZU=
+  - GOPATH=~/go
+  - GOBIN=~/go/bin
+  - secure: CK8UAjG6OZv6sdFF+ghJyoo9n3PK6XlqH9f1Nt8mxmSkkcmprbUsrwIEdcheZvUUC4I7cR1dCwCgqXbB3Ik7CmRTWjv4ZLoJnbLNXRvNlpu7wzEq/pSD4VmdbssSMGK5yP0EMbU+RzZnVmsNMdu7OiSuca/UHihSUbIMYLoInQOo77+6ZpYznjtpWijTZBVGCB6ETBxXn2L0dx2mjOmS2Ti1FRZko0Y1KjqU+GIbEfjo0LJUOI2Olr0+R+eax0ezkLT4xYycoaWBNwxauqQlUToVnCOlCm97QdaGjT0t0Xy4UVCkByBw42VG8oRPRCHicRcVB+SJr1DDY/KrfmQSV7DPEn2XSE4bCwvaaIOal94o1zMZ5mgdrD8UialvNq0wVhlsIQ1Cdvq7i7EXXQ5FpjR788nexlIer0dW9Qoy5mMy0tN1hxbTE3/E/GibqZG5+jqx1EHEMhOzNTWa4LtETzV++9ESGPYO3iQSxRRi4mzOrPeg8BfGfTbpZZXVOKAUkC5YgSJZPVQ1/juZOaAlJ7d8MKdx/GcELqLvLOh9Yx03/5Or6Em+M24UxPXjoNi0w/cDlrsGP2Ye85v4MhVJgP0RcCaY6bJWxsF9gngOqEnmKFh1idbDvWmcoi3rpr8CtbmtA9QzJWgY3qxxHDAmH2Wmg0BRN4gclxBe86TsGZU=
