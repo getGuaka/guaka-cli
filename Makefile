@@ -75,7 +75,6 @@ build-all-local: clean build-linux-docker build-project-darwin
 release-local:
 	make build-all-local
 	@echo "Starting the github release for version ${VERSION}/\n"
-	bash scripts/github-release.sh
 
 	@echo "Upload darwin binary\n"
 	bash scripts/release-darwin.sh
