@@ -26,10 +26,9 @@ release() {
     GITHUB_TOKEN=$4
 
     RELEASE_TARBALL_PATH=-1
-    RELEASE=Guaka-Generator-$VERSION-$PLATFORM-X64
+    RELEASE=guaka-$VERSION-$PLATFORM-x86_64
     RELEASE_TARBALL=$RELEASE.tar.bz2
 
     build_tarball RELEASE_TARBALL_PATH $RELEASE $BINARY
-    github-release upload --user oarrabi --security-token ${GITHUB_TOKEN} --repo Guaka-Generator --tag ${VERSION} --name $RELEASE_TARBALL --file $RELEASE_TARBALL_PATH
+    github-release upload --user getGuaka --security-token ${GITHUB_TOKEN} --repo guaka-cli --tag ${VERSION} --name $RELEASE_TARBALL --file $RELEASE_TARBALL_PATH
 }
-

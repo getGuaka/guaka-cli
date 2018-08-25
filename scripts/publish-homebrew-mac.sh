@@ -15,12 +15,12 @@ SHA=$(shasum -a 256 release/${FOLDER}/${FILE} | cut -f 1 -d " ")
 echo $SHA
 
 cd /tmp
-git clone git@github.com:oarrabi/homebrew-tap.git
+git clone git@github.com:getGuaka/homebrew-tap.git
 cd homebrew-tap
 git checkout -b ${BRANCH}
 
 echo "class Guaka < Formula" > guaka.rb
-echo "  url \"https://github.com/oarrabi/Guaka-Generator/releases/download/${VERSION}/${FILE}\"" >> guaka.rb
+echo "  url \"https://github.com/getGuaka/guaka-cli/releases/download/${VERSION}/${FILE}\"" >> guaka.rb
 echo "  version \"${VERSION}\"" >> guaka.rb
 echo "  sha256 \"${SHA}\" " >> guaka.rb
 echo "" >> guaka.rb

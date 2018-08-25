@@ -1,12 +1,12 @@
 #! /bin/bash
 echo "Installing Guaka generator. Please wait..."
-REPOSITORY="oarrabi/Guaka-Generator"
+REPOSITORY="getGuaka/guaka-cli"
 
 DEFAULT_OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 if ((1<<32)); then
-  DEFAULT_ARCH="X64"
+  DEFAULT_ARCH="x86_64"
 else
-  DEFAULT_ARCH="386"
+  DEFAULT_ARCH="i386"
 fi
 
 OS=${3:-$DEFAULT_OS}
