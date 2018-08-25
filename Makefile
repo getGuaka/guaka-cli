@@ -44,7 +44,7 @@ build-project-linux:
 	make build-project
 	cp -f ./.build/debug/guaka-cli bin/linux/guaka
 
-release-darwin:
+release-darwin: build-project-darwin
 	bash scripts/release-darwin.sh
 
 release-darwin-local:
@@ -52,7 +52,7 @@ release-darwin-local:
 	make build-project-darwin
 	bash scripts/release-darwin.sh
 
-release-linux:
+release-linux: build-project-linux
 	bash scripts/release-linux.sh
 
 release-linux-local:
@@ -91,8 +91,8 @@ release-publish-local:
 	make publish-local
 
 release-and-deploy:
-	if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then make build-project-darwin release-darwin VERSION=${TRAVIS_TAG} ; fi
-	if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then make build-project-linux release-linux VERSION=${TRAVIS_TAG} ; fi
+	if [ "${TRAVIS_OS_NAME}" = "osx" ]; then make release-darwin VERSION=${TRAVIS_TAG} ; fi
+	if [ "${TRAVIS_OS_NAME}" = "linux" ]; then make release-linux VERSION=${TRAVIS_TAG} ; fi
 
 sha256:
 	@shasum -a 256 bin/guaka | cut -f 1 -d " "
