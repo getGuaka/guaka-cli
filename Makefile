@@ -31,18 +31,18 @@ clean:
 	make clean-linux
 
 build-project:
-	swift build -Xswiftc -static-stdlib
+	swift build -c release -Xswiftc -static-stdlib
 
 build-project-darwin:
 	mkdir -p bin/darwin
 	make build-project
-	cp ./.build/debug/guaka-cli bin/darwin/guaka
+	cp ./.build/release/guaka-cli bin/darwin/guaka
 	@echo "\nDarwin version built at bin/darwin/guaka\n"
 
 build-project-linux:
 	mkdir -p bin/linux
 	make build-project
-	cp -f ./.build/debug/guaka-cli bin/linux/guaka
+	cp -f ./.build/release/guaka-cli bin/linux/guaka
 
 release-darwin: build-project-darwin
 	bash scripts/release-darwin.sh
