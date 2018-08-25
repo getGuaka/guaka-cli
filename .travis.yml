@@ -21,6 +21,7 @@ deploy:
   api_key:
     secure: j7oAjY6NB2ENoYQJL2y6wTOazpFraVpAKH+sdAp+eM+OI4XNNuahZCNlXngDztGgUKrii1hH76LI5dBzMdKv+iCSefS3UPDStGT4V+K8JbWAb8ZCaJr33wMJCSFYtEqEisOBr43LOiqPk87zLXdl7gDtOgJj68CyI2bYAdxMBgCal40SFETnuV1i6Egy1LNJ9KRzpIMu+163eALHzfdREO0mpnLVOu7wkDuyCUzsjp1JO1OD8GYYlExa9qF15Za8qaMA1RbpQotbREp/eTC5ekbnaZHfXV3tUC7z7u1IKMNPQI9yNM4auzNNFU+bHRFq3U9JLYB6FOb3hA73MaeGf2II70pVukbrFEkaarDWeLD1uXXvWt1YUJVTHNMjoUnsPQeNc2krdwXtPGxPOQXnikURtnC/LduEksRvzxEUpDGSschlDRjK1RLnQcU3dampRNXzOLL52HWcg3ArKq808gOPkTqcCDvznM6FvaTpZs2A2cT3tXXQAZs/Dvk5Q2I/K+hCaOq8BjSibtiM/u1BFN1b27IfeUovKZGVR4tZutjI+mET43Qw08gP9yCljtxAju9PSaUJomi9KCZuiedd3Mh/Qhtq6ZjDrUgfYEI/ibuSKo3K9spyF3mevhjyhZ8//ysc+FgdfLbnX7wmm3yCu3FBntqvl1BRz4+6d24HfHo=
   file: release/*/*.bz2
+  skip_cleanup: true
   on:
     tags: true
     repo: getGuaka/guaka-cli
