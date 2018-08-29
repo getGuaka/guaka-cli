@@ -9,29 +9,30 @@
 import StringScanner
 import FileUtils
 
-
 public enum GeneratorParts {
 
-  public static let comamndAddingPlaceholder = "  // Command adding placeholder, edit this line"
+  public static let swiftToolsVersion = "// swift-tools-version:4.0"
+
+  public static let comamndAddingPlaceholder = "// Command adding placeholder, edit this line"
 
   public static let importGuaka = "import Guaka"
   public static let importPackageDescription = "import PackageDescription"
 
   public static let guakaURL = "https://github.com/oarrabi/Guaka.git"
-  public static let guakaVersion = "0"
+  public static let guakaVersion = "0.0.0"
 
-  public static let generatedComment = "// Generated, dont update"
+  public static let generatedComment = "// Generated, don't update"
 
   public static func setupFileContent() -> String {
-    return [
-      importGuaka,
-      "",
-      generatedComment,
-      "func setupCommands() {",
-      comamndAddingPlaceholder,
-      "}",
-      ""
-      ].joined(separator: "\n")
+    return """
+      \(importGuaka)
+
+      \(generatedComment)
+      func setupCommands() {
+          \(comamndAddingPlaceholder)
+      }
+
+      """
   }
 
 
@@ -47,42 +48,52 @@ public enum GeneratorParts {
   }
 
   public static func commandFile(forVarName varName: String, commandName: String) -> String {
-    return [
-      importGuaka,
-      "" ,
-      "var \(varName)Command = Command(",
-      "  usage: \"\(commandName)\", configuration: configuration, run: execute)",
-      "",
-      "",
-      "private func configuration(command: Command) {",
-      "" ,
-      "  command.add(flags: [",
-      "    // Add your flags here",
-      "    ]",
-      "  )",
-      ""  ,
-      "  // Other configurations",
-      "}",
-      "",
-      "private func execute(flags: Flags, args: [String]) {",
-      "  // Execute code here",
-      "  print(\"\(commandName) called\")",
-      "}",
-      ""
-      ].joined(separator: "\n")
+    return """
+      \(importGuaka)
+
+      var \(varName)Command = Command(
+          usage: \"\(commandName)\",
+          configuration: configuration,
+          run: execute
+      )
+
+      private func configuration(command: Command) {
+          command.add(flags: [
+              // Add your flags here
+          ])
+
+          // Other configurations
+      }
+
+      private func execute(flags: Flags, args: [String]) {
+          // Execute code here
+          print(\"\(commandName) called\")
+      }
+
+      """
   }
 
   public static func packageFile(forCommandName name: String) -> String {
-    return [
-      importPackageDescription,
-      "let package = Package(",
-      "  name: \"\(name)\",",
-      "  dependencies: [",
-      "    .Package(url: \"\(guakaURL)\", majorVersion: \(guakaVersion)),",
-      "    ]",
-      ")",
-      ""
-      ].joined(separator: "\n")
+    return """
+      \(swiftToolsVersion)
+      \(importPackageDescription)
+
+      let package = Package(
+          name: "\(name)",
+          dependencies: [
+              .package(url: "\(guakaURL)", from: "\(guakaVersion)"),
+          ],
+          targets: [
+              .target(
+                  name: "\(name)",
+                  dependencies: ["Guaka"]),
+              .testTarget(
+                  name: "\(name)Tests",
+                  dependencies: ["\(name)"]),
+          ],
+      )
+
+      """
   }
 
   public static func updateSetupFile(withContent content: String,
@@ -95,9 +106,9 @@ public enum GeneratorParts {
 
     var line = ""
     if let parent = parent {
-      line = "  \(parent)Command.add(subCommand: \(command))"
+      line = "\(parent)Command.add(subCommand: \(command))"
     } else {
-      line = "  rootCommand.add(subCommand: \(command))"
+      line = "rootCommand.add(subCommand: \(command))"
     }
 
     let end = content.index(indexFound, offsetBy: comamndAddingPlaceholder.count)
@@ -105,7 +116,7 @@ public enum GeneratorParts {
     let part1 = content[content.startIndex..<indexFound]
     let part2 = content[end..<content.endIndex]
 
-    return part1 + line + "\n\(comamndAddingPlaceholder)" + part2
+    return part1 + line + "\n    \(comamndAddingPlaceholder)" + part2
   }
 
   public static func commandName(forPassedArgs args: [String]) throws -> String {

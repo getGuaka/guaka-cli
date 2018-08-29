@@ -49,7 +49,14 @@ public enum GuakaError: Error {
       return "Cannot read contents of file \(path)".f.red
 
     case .setupFileAltered:
-      return "Guaka setup.swift file has been altered.\nThe placeholder used to insert commands cannot be found \(GeneratorParts.comamndAddingPlaceholder).\nYou can try to add it yourself by updating `setup.swift` to look like\n\n\(GeneratorParts.setupFileContent())\n\nAdding command won't be possible.".f.red
+      return """
+      Guaka setup.swift file has been altered.
+      The placeholder used to insert commands cannot be found \(GeneratorParts.comamndAddingPlaceholder).
+      You can try to add it yourself by updating `setup.swift` to look like
+
+      \(GeneratorParts.setupFileContent())
+      Adding command won't be possible."
+      """.f.red
 
     case .notAGuakaProject:
       return "This command can only be executed inside a Guaka project.".f.red

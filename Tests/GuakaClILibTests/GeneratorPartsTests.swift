@@ -13,12 +13,55 @@ class GeneratorPartsTests: XCTestCase {
 
   func testGeneratesCommandFile() {
     let file = GeneratorParts.commandFile(forVarName: "test", commandName: "testit")
-    XCTAssertEqual(file, "import Guaka\n\nvar testCommand = Command(\n  usage: \"testit\", configuration: configuration, run: execute)\n\n\nprivate func configuration(command: Command) {\n\n  command.add(flags: [\n    // Add your flags here\n    ]\n  )\n\n  // Other configurations\n}\n\nprivate func execute(flags: Flags, args: [String]) {\n  // Execute code here\n  print(\"testit called\")\n}\n")
+    let expectedFile = """
+      import Guaka
+
+      var testCommand = Command(
+          usage: "testit",
+          configuration: configuration,
+          run: execute
+      )
+
+      private func configuration(command: Command) {
+          command.add(flags: [
+              // Add your flags here
+          ])
+
+          // Other configurations
+      }
+
+      private func execute(flags: Flags, args: [String]) {
+          // Execute code here
+          print("testit called")
+      }
+
+      """
+    XCTAssertEqual(file, expectedFile)
   }
 
   func testGeneratesPackageFile() {
     let file = GeneratorParts.packageFile(forCommandName: "test")
-    XCTAssertEqual(file, "import PackageDescription\nlet package = Package(\n  name: \"test\",\n  dependencies: [\n    .Package(url: \"https://github.com/oarrabi/Guaka.git\", majorVersion: 0),\n    ]\n)\n")
+    let expectedFile = """
+      // swift-tools-version:4.0
+      import PackageDescription
+
+      let package = Package(
+          name: "test",
+          dependencies: [
+              .package(url: "https://github.com/oarrabi/Guaka.git", from: "0.0.0"),
+          ],
+          targets: [
+              .target(
+                  name: "test",
+                  dependencies: ["Guaka"]),
+              .testTarget(
+                  name: "testTests",
+                  dependencies: ["test"]),
+          ],
+      )
+
+      """
+    XCTAssertEqual(file, expectedFile)
   }
 
   func testGeneratesMainFile() {
@@ -28,26 +71,68 @@ class GeneratorPartsTests: XCTestCase {
 
   func testGeneratesSetupFile() {
     let file = GeneratorParts.setupFileContent()
-    XCTAssertEqual(file, "import Guaka\n\n// Generated, dont update\nfunc setupCommands() {\n  // Command adding placeholder, edit this line\n}\n")
+    let expectedFile = """
+      import Guaka
+
+      // Generated, don't update
+      func setupCommands() {
+          // Command adding placeholder, edit this line
+      }
+
+      """
+    XCTAssertEqual(file, expectedFile)
   }
 
-  func testUpdatesSetupWihtoutParentFile() {
+  func testUpdatesSetupWithoutParentFile() {
     let file = GeneratorParts.setupFileContent()
     let updated = try! GeneratorParts.updateSetupFile(withContent: file, byAddingCommand: "new", withParent: nil)
-    XCTAssertEqual(updated, "import Guaka\n\n// Generated, dont update\nfunc setupCommands() {\n  rootCommand.add(subCommand: new)\n  // Command adding placeholder, edit this line\n}\n")
+    let expected = """
+      import Guaka
+
+      // Generated, don't update
+      func setupCommands() {
+          rootCommand.add(subCommand: new)
+          // Command adding placeholder, edit this line
+      }
+
+      """
+    XCTAssertEqual(updated, expected)
   }
 
-  func testUpdatesSetupWihtParentFile() {
+  func testUpdatesSetupWithParentFile() {
     let file = GeneratorParts.setupFileContent()
     let updated = try! GeneratorParts.updateSetupFile(withContent: file, byAddingCommand: "new", withParent: "root")
-    XCTAssertEqual(updated, "import Guaka\n\n// Generated, dont update\nfunc setupCommands() {\n  rootCommand.add(subCommand: new)\n  // Command adding placeholder, edit this line\n}\n")
+    let expected = """
+      import Guaka
+
+      // Generated, don't update
+      func setupCommands() {
+          rootCommand.add(subCommand: new)
+          // Command adding placeholder, edit this line
+      }
+
+      """
+    XCTAssertEqual(updated, expected)
   }
 
   func testItThrowsErrorIfCannotFindThePlaceholder() {
     do {
       _ = try GeneratorParts.updateSetupFile(withContent: "abcd", byAddingCommand: "new", withParent: "root")
     } catch let e as GuakaError {
-      XCTAssertEqual(e.error, "Guaka setup.swift file has been altered.\nThe placeholder used to insert commands cannot be found   // Command adding placeholder, edit this line.\nYou can try to add it yourself by updating `setup.swift` to look like\n\nimport Guaka\n\n// Generated, dont update\nfunc setupCommands() {\n  // Command adding placeholder, edit this line\n}\n\n\nAdding command won't be possible.".f.red)
+      XCTAssertEqual(e.error, """
+        Guaka setup.swift file has been altered.
+        The placeholder used to insert commands cannot be found // Command adding placeholder, edit this line.
+        You can try to add it yourself by updating `setup.swift` to look like
+
+        import Guaka
+
+        // Generated, don't update
+        func setupCommands() {
+            // Command adding placeholder, edit this line
+        }
+
+        Adding command won't be possible."
+        """.f.red)
     } catch {
       XCTFail()
     }
@@ -61,7 +146,18 @@ class GeneratorPartsTests: XCTestCase {
 
     updated = try! GeneratorParts.updateSetupFile(withContent: updated, byAddingCommand: "new3")
 
-    XCTAssertEqual(updated, "import Guaka\n\n// Generated, dont update\nfunc setupCommands() {\n  rootCommand.add(subCommand: new1)\n  rootCommand.add(subCommand: new2)\n  rootCommand.add(subCommand: new3)\n  // Command adding placeholder, edit this line\n}\n")
+    XCTAssertEqual(updated, """
+      import Guaka
+
+      // Generated, don't update
+      func setupCommands() {
+          rootCommand.add(subCommand: new1)
+          rootCommand.add(subCommand: new2)
+          rootCommand.add(subCommand: new3)
+          // Command adding placeholder, edit this line
+      }
+
+      """)
   }
 
   func testItGetsNameIfCorrect() {
@@ -137,8 +233,8 @@ class GeneratorPartsTests: XCTestCase {
     ("testGeneratesPackageFile", testGeneratesPackageFile),
     ("testGeneratesMainFile", testGeneratesMainFile),
     ("testGeneratesSetupFile", testGeneratesSetupFile),
-    ("testUpdatesSetupWihtoutParentFile", testUpdatesSetupWihtoutParentFile),
-    ("testUpdatesSetupWihtParentFile", testUpdatesSetupWihtParentFile),
+    ("testUpdatesSetupWithoutParentFile", testUpdatesSetupWithoutParentFile),
+    ("testUpdatesSetupWithParentFile", testUpdatesSetupWithParentFile),
     ("testItThrowsErrorIfCannotFindThePlaceholder", testItThrowsErrorIfCannotFindThePlaceholder),
     ("testCanUpdateFileMultipleTimes", testCanUpdateFileMultipleTimes),
     ("testItGetsNameIfCorrect", testItGetsNameIfCorrect),
