@@ -7,5 +7,5 @@
 //
 
 enum Constants {
-  static let version = "0.1.1"
+  static let version = "0.2.1"
 }
