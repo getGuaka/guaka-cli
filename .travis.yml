@@ -23,3 +23,5 @@ deploy:
   on:
     tags: true
     repo: getGuaka/guaka-cli
+notifications:
+  email: false
