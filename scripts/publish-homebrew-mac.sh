@@ -30,7 +30,7 @@ echo "  end" >> guaka.rb
 echo "end" >> guaka.rb
 
 git add guaka.rb
-git commit -m "Releasing Guaka-Generator version ${VERSION}"
+git commit --author=getGuaka@users.noreply.github.com -m "Releasing Guaka-Generator version ${VERSION}"
 git push origin ${BRANCH}
 
 hub pull-request -m "Releasing Guaka-Generator version ${VERSION}"
