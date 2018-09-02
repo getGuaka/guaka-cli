@@ -57,7 +57,7 @@ class GeneratorPartsTests: XCTestCase {
               .testTarget(
                   name: "testTests",
                   dependencies: ["test"]),
-          ],
+          ]
       )
 
       """
