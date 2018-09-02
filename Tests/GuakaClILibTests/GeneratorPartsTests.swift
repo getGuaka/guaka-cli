@@ -48,7 +48,7 @@ class GeneratorPartsTests: XCTestCase {
       let package = Package(
           name: "test",
           dependencies: [
-              .package(url: "https://github.com/oarrabi/Guaka.git", from: "0.0.0"),
+              .package(url: "https://github.com/nsomar/Guaka.git", from: "0.0.0"),
           ],
           targets: [
               .target(

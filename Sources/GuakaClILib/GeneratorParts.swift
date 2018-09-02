@@ -18,7 +18,7 @@ public enum GeneratorParts {
   public static let importGuaka = "import Guaka"
   public static let importPackageDescription = "import PackageDescription"
 
-  public static let guakaURL = "https://github.com/oarrabi/Guaka.git"
+  public static let guakaURL = "https://github.com/nsomar/Guaka.git"
   public static let guakaVersion = "0.0.0"
 
   public static let generatedComment = "// Generated, don't update"
