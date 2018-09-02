@@ -18,7 +18,7 @@ public struct Paths {
   }
 
   public var sourcesDirectoryPath: String {
-    return "\(rootDirectory)/Sources"
+    return "\(rootDirectory)/Sources/\(projectName)"
   }
 
   public var packagesFile: String {

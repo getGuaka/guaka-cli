@@ -20,7 +20,7 @@ class PathsTests: XCTestCase {
   func testGenerateSourcePathExample() {
     let p = Paths(rootDirectory: "root")
     XCTAssertEqual(p.rootDirectory, "root")
-    XCTAssertEqual(p.sourcesDirectoryPath, "root/Sources")
+    XCTAssertEqual(p.sourcesDirectoryPath, "root/Sources/root")
   }
 
   func testGetsPackagesFile() {
@@ -30,17 +30,17 @@ class PathsTests: XCTestCase {
 
   func testGetsMainSwiftFile() {
     let p = Paths(rootDirectory: "root")
-    XCTAssertEqual(p.mainSwiftFile, "root/Sources/main.swift")
+    XCTAssertEqual(p.mainSwiftFile, "root/Sources/root/main.swift")
   }
 
   func testGetsSetupSwiftFile() {
     let p = Paths(rootDirectory: "root")
-    XCTAssertEqual(p.setupSwiftFile, "root/Sources/setup.swift")
+    XCTAssertEqual(p.setupSwiftFile, "root/Sources/root/setup.swift")
   }
 
   func testGetsPathForSwiftFile() {
     let p = Paths(rootDirectory: "root")
-    XCTAssertEqual(p.path(forSwiftFile: "abc"), "root/Sources/abc.swift")
+    XCTAssertEqual(p.path(forSwiftFile: "abc"), "root/Sources/root/abc.swift")
   }
 
   func testGetsProjectName() {
@@ -60,10 +60,10 @@ class PathsTests: XCTestCase {
   func testItChecksIfCurrentIsGuaka() {
     MockDirectoryType.currentDirectory = "/root"
     MockFileType.fileExistanceValue = [
-      "/root/Sources": true,
+      "/root/Sources/root": true,
       "/root/Package.swift": true,
-      "/root/Sources/main.swift": true,
-      "/root/Sources/setup.swift": true,
+      "/root/Sources/root/main.swift": true,
+      "/root/Sources/root/setup.swift": true,
     ]
 
     GuakaCliConfig.dir = MockDirectoryType.self
@@ -78,8 +78,8 @@ class PathsTests: XCTestCase {
     MockFileType.fileExistanceValue = [
       "/root/Sources": false,
       "/root/Package.swift": true,
-      "/root/Sources/main.swift": true,
-      "/root/Sources/setup.swift": true,
+      "/root/Sources/root/main.swift": true,
+      "/root/Sources/root/setup.swift": true,
     ]
 
     GuakaCliConfig.dir = MockDirectoryType.self
@@ -94,8 +94,8 @@ class PathsTests: XCTestCase {
     MockFileType.fileExistanceValue = [
       "/root/Sources": true,
       "/root/Package.swift": false,
-      "/root/Sources/main.swift": true,
-      "/root/Sources/setup.swift": true,
+      "/root/Sources/root/main.swift": true,
+      "/root/Sources/root/setup.swift": true,
     ]
 
     GuakaCliConfig.dir = MockDirectoryType.self
@@ -110,8 +110,8 @@ class PathsTests: XCTestCase {
     MockFileType.fileExistanceValue = [
       "/root/Sources": true,
       "/root/Package.swift": true,
-      "/root/Sources/main.swift": true,
-      "/root/Sources/setup.swift": false,
+      "/root/Sources/root/main.swift": true,
+      "/root/Sources/root/setup.swift": false,
     ]
 
     GuakaCliConfig.dir = MockDirectoryType.self
@@ -126,8 +126,8 @@ class PathsTests: XCTestCase {
     MockFileType.fileExistanceValue = [
       "/root/Sources": true,
       "/root/Package.swift": true,
-      "/root/Sources/main.swift": false,
-      "/root/Sources/setup.swift": true,
+      "/root/Sources/root/main.swift": false,
+      "/root/Sources/root/setup.swift": true,
     ]
 
     GuakaCliConfig.dir = MockDirectoryType.self
