@@ -1,6 +1,7 @@
 #! /bin/bash
 echo "Installing Guaka generator. Please wait..."
 REPOSITORY="getGuaka/guaka-cli"
+TOOL_NAME="guaka"
 
 DEFAULT_OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 if ((1<<32)); then
@@ -27,7 +28,7 @@ DEFAULT_TAG_NAME=$(echo "$RELEASES_RESPONSE" \
            | sed "s/[\",]//g")
 TAG_NAME=${5:-$DEFAULT_TAG_NAME}
 
-FILENAME="$REPOSITORY_NAME-$TAG_NAME-$ARCH-$OS.tar.bz2"
+FILENAME="$TOOL_NAME-$TAG_NAME-$ARCH-$OS.tar.bz2"
 DOWNLOAD_URL="https://github.com/$REPOSITORY/releases/download/$TAG_NAME/$FILENAME"
 
 TEMP_TARBAL="/tmp/$FILENAME"
