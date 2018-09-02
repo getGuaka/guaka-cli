@@ -17,6 +17,8 @@ echo $SHA
 cd /tmp
 git clone git@github.com:getGuaka/homebrew-tap.git
 cd homebrew-tap
+git config user.name Guaka
+git config user.email getGuaka@users.noreply.github.com
 git checkout -b ${BRANCH}
 
 echo "class Guaka < Formula" > guaka.rb
@@ -30,7 +32,7 @@ echo "  end" >> guaka.rb
 echo "end" >> guaka.rb
 
 git add guaka.rb
-git commit --author=getGuaka@users.noreply.github.com -m "Releasing Guaka-Generator version ${VERSION}"
+git commit -m "Releasing Guaka-Generator version ${VERSION}"
 git push origin ${BRANCH}
 
 hub pull-request -m "Releasing Guaka-Generator version ${VERSION}"
