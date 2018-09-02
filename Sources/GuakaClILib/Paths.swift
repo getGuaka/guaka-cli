@@ -18,7 +18,11 @@ public struct Paths {
   }
 
   public var sourcesDirectoryPath: String {
-    return "\(rootDirectory)/Sources/\(projectName)"
+    return "\(rootDirectory)/Sources"
+  }
+
+  public var mainTargetDirectoryPath: String {
+    return "\(sourcesDirectoryPath)/\(projectName)"
   }
 
   public var packagesFile: String {
@@ -26,15 +30,15 @@ public struct Paths {
   }
 
   public var mainSwiftFile: String {
-    return "\(sourcesDirectoryPath)/main.swift"
+    return "\(mainTargetDirectoryPath)/main.swift"
   }
 
   public var setupSwiftFile: String {
-    return "\(sourcesDirectoryPath)/setup.swift"
+    return "\(mainTargetDirectoryPath)/setup.swift"
   }
 
   public func path(forSwiftFile name: String) -> String {
-    return "\(sourcesDirectoryPath)/\(name).swift"
+    return "\(mainTargetDirectoryPath)/\(name).swift"
   }
 
   public var projectName: String {
@@ -42,7 +46,7 @@ public struct Paths {
   }
 
   public var isGuakaDirectory: Bool {
-    if GuakaCliConfig.file.exists(atPath: sourcesDirectoryPath) &&
+    if GuakaCliConfig.file.exists(atPath: mainTargetDirectoryPath) &&
       GuakaCliConfig.file.exists(atPath: packagesFile) &&
       GuakaCliConfig.file.exists(atPath: mainSwiftFile) &&
       GuakaCliConfig.file.exists(atPath: setupSwiftFile) {
