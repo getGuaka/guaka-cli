@@ -124,7 +124,7 @@ class DirectoryUtilitiesTests: XCTestCase {
   func testTriesToCreateRootFolderIfNonExisting() {
     MockDirectoryType.pathsCreationValue = [
       "/root": true,
-      "/root/Sources": true,
+      "/root/Sources/root": true,
     ]
 
     GuakaCliConfig.dir = MockDirectoryType.self
@@ -140,7 +140,7 @@ class DirectoryUtilitiesTests: XCTestCase {
   func testTriesToCreateSourcesFolderIfNonExisting() {
     MockDirectoryType.pathsCreationValue = [
       "/root": true,
-      "/root/Sources": true,
+      "/root/Sources/root": true,
     ]
 
     GuakaCliConfig.dir = MockDirectoryType.self
@@ -149,7 +149,7 @@ class DirectoryUtilitiesTests: XCTestCase {
 
     try! DirectoryUtilities.createDirectoryStructure(paths: paths,
                                                      directoryState: .nonExisting)
-    let val = MockDirectoryType.pathsCreated.contains("/root/Sources")
+    let val = MockDirectoryType.pathsCreated.contains("/root/Sources/root")
     XCTAssertEqual(val, true)
   }
 
@@ -177,6 +177,7 @@ class DirectoryUtilitiesTests: XCTestCase {
     MockDirectoryType.pathsCreationValue = [
       "/root": true,
       "/root/Sources": false,
+      "/root/Sources/root": false,
     ]
 
     GuakaCliConfig.dir = MockDirectoryType.self
@@ -187,7 +188,7 @@ class DirectoryUtilitiesTests: XCTestCase {
       try DirectoryUtilities.createDirectoryStructure(paths: paths,
                                                       directoryState: .nonExisting)
     } catch GuakaError.failedCreatingFolder(let path) {
-      XCTAssertEqual(path, "/root/Sources")
+      XCTAssertEqual(path, "/root/Sources/root")
     } catch {
       XCTFail()
     }
@@ -197,11 +198,11 @@ class DirectoryUtilitiesTests: XCTestCase {
     MockDirectoryType.currentDirectory = "/root"
     MockDirectoryType.pathsExistanceValue = ["/root": true]
     MockDirectoryType.pathsEmptyValue = ["/root": true]
-    MockDirectoryType.pathsCreationValue = ["/root": true, "/root/Sources": true]
+    MockDirectoryType.pathsCreationValue = ["/root": true, "/root/Sources/root": true]
 
     GuakaCliConfig.dir = MockDirectoryType.self
 
-    try! DirectoryUtilities.createDirectoryStrucutre(forName: nil)
+    try! DirectoryUtilities.createDirectoryStructure(forName: nil)
 
   }
 

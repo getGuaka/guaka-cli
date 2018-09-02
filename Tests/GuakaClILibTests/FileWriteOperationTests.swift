@@ -31,7 +31,7 @@ class FileWriteOperationTests: XCTestCase {
     let operations = FileOperations.newProjectOperations(paths: Paths(rootDirectory: "/root/abcd"))
     let op = operations.operations.filter { $0.filePath.contains("main.swift") }.first! as! FileWriteOperation
 
-    XCTAssertEqual(op.filePath, "/root/abcd/Sources/main.swift")
+    XCTAssertEqual(op.filePath, "/root/abcd/Sources/abcd/main.swift")
     XCTAssertEqual(op.fileContent, GeneratorParts.mainSwiftFileContent())
     XCTAssertEqual(op.errorString, "main swift")
   }
@@ -40,7 +40,7 @@ class FileWriteOperationTests: XCTestCase {
     let operations = FileOperations.newProjectOperations(paths: Paths(rootDirectory: "/root/abcd"))
     let op = operations.operations.filter { $0.filePath.contains("root.swift") }.first! as! FileWriteOperation
 
-    XCTAssertEqual(op.filePath, "/root/abcd/Sources/root.swift")
+    XCTAssertEqual(op.filePath, "/root/abcd/Sources/abcd/root.swift")
     XCTAssertEqual(op.fileContent, GeneratorParts.commandFile(forVarName: "root", commandName: "abcd"))
     XCTAssertEqual(op.errorString, "root swift")
   }
@@ -49,7 +49,7 @@ class FileWriteOperationTests: XCTestCase {
     let operations = FileOperations.newProjectOperations(paths: Paths(rootDirectory: "/root/abcd"))
     let op = operations.operations.filter { $0.filePath.contains("setup.swift") }.first! as! FileWriteOperation
 
-    XCTAssertEqual(op.filePath, "/root/abcd/Sources/setup.swift")
+    XCTAssertEqual(op.filePath, "/root/abcd/Sources/abcd/setup.swift")
     XCTAssertEqual(op.fileContent, GeneratorParts.setupFileContent())
     XCTAssertEqual(op.errorString, "setup swift")
   }
@@ -89,9 +89,9 @@ class FileWriteOperationTests: XCTestCase {
   func testItWritesAllFilesForNewProject() {
     MockFileType.fileWriteValue = [
       "/root/abcd/Package.swift": true,
-      "/root/abcd/Sources/main.swift": true,
-      "/root/abcd/Sources/root.swift": true,
-      "/root/abcd/Sources/setup.swift": true,
+      "/root/abcd/Sources/abcd/main.swift": true,
+      "/root/abcd/Sources/abcd/root.swift": true,
+      "/root/abcd/Sources/abcd/setup.swift": true,
     ]
     GuakaCliConfig.file = MockFileType.self
 
@@ -100,17 +100,17 @@ class FileWriteOperationTests: XCTestCase {
 
     XCTAssertEqual(MockFileType.writtenFiles.count, 4)
     XCTAssertEqual(MockFileType.writtenFiles["/root/abcd/Package.swift"] == nil, false)
-    XCTAssertEqual(MockFileType.writtenFiles["/root/abcd/Sources/main.swift"] == nil, false)
-    XCTAssertEqual(MockFileType.writtenFiles["/root/abcd/Sources/root.swift"] == nil, false)
-    XCTAssertEqual(MockFileType.writtenFiles["/root/abcd/Sources/setup.swift"] == nil, false)
+    XCTAssertEqual(MockFileType.writtenFiles["/root/abcd/Sources/abcd/main.swift"] == nil, false)
+    XCTAssertEqual(MockFileType.writtenFiles["/root/abcd/Sources/abcd/root.swift"] == nil, false)
+    XCTAssertEqual(MockFileType.writtenFiles["/root/abcd/Sources/abcd/setup.swift"] == nil, false)
   }
 
   func testIfAnyFailsTheOperationFails() {
     MockFileType.fileWriteValue = [
       "/root/abcd/Package.swift": true,
-      "/root/abcd/Sources/main.swift": true,
-      "/root/abcd/Sources/root.swift": false,
-      "/root/abcd/Sources/setup.swift": true,
+      "/root/abcd/Sources/abcd/main.swift": true,
+      "/root/abcd/Sources/abcd/root.swift": false,
+      "/root/abcd/Sources/abcd/setup.swift": true,
     ]
     GuakaCliConfig.file = MockFileType.self
 
@@ -126,9 +126,9 @@ class FileWriteOperationTests: XCTestCase {
 
     XCTAssertEqual(MockFileType.writtenFiles.count, 3)
     XCTAssertEqual(MockFileType.writtenFiles["/root/abcd/Package.swift"] == nil, false)
-    XCTAssertEqual(MockFileType.writtenFiles["/root/abcd/Sources/main.swift"] == nil, false)
-    XCTAssertEqual(MockFileType.writtenFiles["/root/abcd/Sources/root.swift"] == nil, false)
-    XCTAssertEqual(MockFileType.writtenFiles["/root/abcd/Sources/setup.swift"] == nil, true)
+    XCTAssertEqual(MockFileType.writtenFiles["/root/abcd/Sources/abcd/main.swift"] == nil, false)
+    XCTAssertEqual(MockFileType.writtenFiles["/root/abcd/Sources/abcd/root.swift"] == nil, false)
+    XCTAssertEqual(MockFileType.writtenFiles["/root/abcd/Sources/abcd/setup.swift"] == nil, true)
   }
 
   func testCanPerformUpdateOperations() {
@@ -191,7 +191,7 @@ class FileWriteOperationTests: XCTestCase {
 
     let op = operations.operations.filter { $0.filePath.contains("new.swift") }.first! as! FileWriteOperation
 
-    XCTAssertEqual(op.filePath, "/root/abc/Sources/new.swift")
+    XCTAssertEqual(op.filePath, "/root/abc/Sources/abc/new.swift")
     XCTAssertEqual(op.fileContent, GeneratorParts.commandFile(forVarName: "new", commandName: "new"))
     XCTAssertEqual(op.errorString, "new swift")
   }
@@ -203,17 +203,17 @@ class FileWriteOperationTests: XCTestCase {
 
     let op = operations.operations.filter { $0.filePath.contains("setup.swift") }.first! as! FileUpdateOperation
 
-    XCTAssertEqual(op.filePath, "/root/abc/Sources/setup.swift")
+    XCTAssertEqual(op.filePath, "/root/abc/Sources/abc/setup.swift")
     XCTAssertEqual(op.errorString, "setup swift")
   }
 
   func testItUpdatesTheSetupFileWithNoParent() {
     MockFileType.fileWriteValue = [
-      "/root/abc/Sources/setup.swift": true,
-      "/root/abc/Sources/new.swift": true
+      "/root/abc/Sources/abc/setup.swift": true,
+      "/root/abc/Sources/abc/new.swift": true
     ]
     MockFileType.fileReadValue = [
-      "/root/abc/Sources/setup.swift": GeneratorParts.setupFileContent()
+      "/root/abc/Sources/abc/setup.swift": GeneratorParts.setupFileContent()
     ]
     GuakaCliConfig.file = MockFileType.self
 
@@ -229,17 +229,17 @@ class FileWriteOperationTests: XCTestCase {
       byAddingCommand: "newCommand",
       withParent: nil)
 
-    XCTAssertEqual(MockFileType.writtenFiles["/root/abc/Sources/setup.swift"], updatedSetup)
-    XCTAssertEqual(MockFileType.writtenFiles["/root/abc/Sources/new.swift"], GeneratorParts.commandFile(forVarName: "new", commandName: "new"))
+    XCTAssertEqual(MockFileType.writtenFiles["/root/abc/Sources/abc/setup.swift"], updatedSetup)
+    XCTAssertEqual(MockFileType.writtenFiles["/root/abc/Sources/abc/new.swift"], GeneratorParts.commandFile(forVarName: "new", commandName: "new"))
   }
 
   func testItUpdatesTheSetupFileWithParent() {
     MockFileType.fileWriteValue = [
-      "/root/abc/Sources/setup.swift": true,
-      "/root/abc/Sources/new.swift": true
+      "/root/abc/Sources/abc/setup.swift": true,
+      "/root/abc/Sources/abc/new.swift": true
     ]
     MockFileType.fileReadValue = [
-      "/root/abc/Sources/setup.swift": GeneratorParts.setupFileContent()
+      "/root/abc/Sources/abc/setup.swift": GeneratorParts.setupFileContent()
     ]
     GuakaCliConfig.file = MockFileType.self
 
@@ -255,17 +255,17 @@ class FileWriteOperationTests: XCTestCase {
       byAddingCommand: "newCommand",
       withParent: "something")
 
-    XCTAssertEqual(MockFileType.writtenFiles["/root/abc/Sources/setup.swift"], updatedSetup)
-    XCTAssertEqual(MockFileType.writtenFiles["/root/abc/Sources/new.swift"], GeneratorParts.commandFile(forVarName: "new", commandName: "new"))
+    XCTAssertEqual(MockFileType.writtenFiles["/root/abc/Sources/abc/setup.swift"], updatedSetup)
+    XCTAssertEqual(MockFileType.writtenFiles["/root/abc/Sources/abc/new.swift"], GeneratorParts.commandFile(forVarName: "new", commandName: "new"))
   }
 
   func testItFailsToUpdateIfCannotReadSetupFileContent() {
     MockFileType.fileWriteValue = [
-      "/root/abc/Sources/setup.swift": true,
-      "/root/abc/Sources/new.swift": true
+      "/root/abc/Sources/abc/setup.swift": true,
+      "/root/abc/Sources/abc/new.swift": true
     ]
     MockFileType.fileReadValue = [
-      "/root/abc/Sources/setup.swift": "asasds"
+      "/root/abc/Sources/abc/setup.swift": "asasds"
     ]
     GuakaCliConfig.file = MockFileType.self
 

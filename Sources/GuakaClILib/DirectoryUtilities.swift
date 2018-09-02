@@ -16,7 +16,7 @@ public enum DirectoryUtilities {
     return Paths(rootDirectory: directory)
   }
 
-  public static func createDirectoryStrucutre(forName name: String?) throws {
+  public static func createDirectoryStructure(forName name: String?) throws {
     let directory = try currentDirectory(forName: name)
     let paths = Paths(rootDirectory: directory)
 
