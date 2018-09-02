@@ -90,7 +90,7 @@ public enum GeneratorParts {
               .testTarget(
                   name: "\(name)Tests",
                   dependencies: ["\(name)"]),
-          ],
+          ]
       )
 
       """
