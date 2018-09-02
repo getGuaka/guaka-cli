@@ -54,9 +54,6 @@ class GeneratorPartsTests: XCTestCase {
               .target(
                   name: "test",
                   dependencies: ["Guaka"]),
-              .testTarget(
-                  name: "testTests",
-                  dependencies: ["test"]),
           ]
       )
 

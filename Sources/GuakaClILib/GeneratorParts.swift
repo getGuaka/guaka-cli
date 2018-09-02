@@ -87,9 +87,6 @@ public enum GeneratorParts {
               .target(
                   name: "\(name)",
                   dependencies: ["Guaka"]),
-              .testTarget(
-                  name: "\(name)Tests",
-                  dependencies: ["\(name)"]),
           ]
       )
 
