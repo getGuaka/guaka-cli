@@ -124,6 +124,7 @@ class DirectoryUtilitiesTests: XCTestCase {
   func testTriesToCreateRootFolderIfNonExisting() {
     MockDirectoryType.pathsCreationValue = [
       "/root": true,
+      "/root/Sources": true,
       "/root/Sources/root": true,
     ]
 
@@ -140,6 +141,7 @@ class DirectoryUtilitiesTests: XCTestCase {
   func testTriesToCreateSourcesFolderIfNonExisting() {
     MockDirectoryType.pathsCreationValue = [
       "/root": true,
+      "/root/Sources": true,
       "/root/Sources/root": true,
     ]
 
@@ -156,7 +158,7 @@ class DirectoryUtilitiesTests: XCTestCase {
   func testThrowsErrorIfCreateRootFailed() {
     MockDirectoryType.pathsCreationValue = [
       "/root": false,
-      "/root/Sources": true,
+      "/root/Sources/root": true,
     ]
 
     GuakaCliConfig.dir = MockDirectoryType.self
@@ -177,7 +179,6 @@ class DirectoryUtilitiesTests: XCTestCase {
     MockDirectoryType.pathsCreationValue = [
       "/root": true,
       "/root/Sources": false,
-      "/root/Sources/root": false,
     ]
 
     GuakaCliConfig.dir = MockDirectoryType.self
@@ -188,7 +189,7 @@ class DirectoryUtilitiesTests: XCTestCase {
       try DirectoryUtilities.createDirectoryStructure(paths: paths,
                                                       directoryState: .nonExisting)
     } catch GuakaError.failedCreatingFolder(let path) {
-      XCTAssertEqual(path, "/root/Sources/root")
+      XCTAssertEqual(path, "/root/Sources")
     } catch {
       XCTFail()
     }
@@ -198,7 +199,7 @@ class DirectoryUtilitiesTests: XCTestCase {
     MockDirectoryType.currentDirectory = "/root"
     MockDirectoryType.pathsExistanceValue = ["/root": true]
     MockDirectoryType.pathsEmptyValue = ["/root": true]
-    MockDirectoryType.pathsCreationValue = ["/root": true, "/root/Sources/root": true]
+    MockDirectoryType.pathsCreationValue = ["/root": true, "/root/Sources": true, "/root/Sources/root": true]
 
     GuakaCliConfig.dir = MockDirectoryType.self
 

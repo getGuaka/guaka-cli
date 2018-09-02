@@ -64,6 +64,10 @@ public enum DirectoryUtilities {
     if GuakaCliConfig.dir.create(atPath: paths.sourcesDirectoryPath) == false {
       throw GuakaError.failedCreatingFolder(paths.sourcesDirectoryPath)
     }
+
+    if GuakaCliConfig.dir.create(atPath: paths.mainTargetDirectoryPath) == false {
+        throw GuakaError.failedCreatingFolder(paths.mainTargetDirectoryPath)
+    }
   }
   
   

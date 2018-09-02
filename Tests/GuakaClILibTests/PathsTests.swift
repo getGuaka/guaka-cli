@@ -20,7 +20,8 @@ class PathsTests: XCTestCase {
   func testGenerateSourcePathExample() {
     let p = Paths(rootDirectory: "root")
     XCTAssertEqual(p.rootDirectory, "root")
-    XCTAssertEqual(p.sourcesDirectoryPath, "root/Sources/root")
+    XCTAssertEqual(p.sourcesDirectoryPath, "root/Sources")
+    XCTAssertEqual(p.mainTargetDirectoryPath, "root/Sources/root")
   }
 
   func testGetsPackagesFile() {
