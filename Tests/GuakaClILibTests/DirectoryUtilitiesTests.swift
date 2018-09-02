@@ -201,7 +201,7 @@ class DirectoryUtilitiesTests: XCTestCase {
 
     GuakaCliConfig.dir = MockDirectoryType.self
 
-    try! DirectoryUtilities.createDirectoryStrucutre(forName: nil)
+    try! DirectoryUtilities.createDirectoryStructure(forName: nil)
 
   }
 

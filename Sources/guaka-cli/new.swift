@@ -49,7 +49,7 @@ private func execute(flags: Flags, args: [String]) {
   do {
     let name = try GeneratorParts.projectName(forPassedArgs: args)
     let paths = try DirectoryUtilities.paths(forName: name)
-    try DirectoryUtilities.createDirectoryStrucutre(forName: name)
+    try DirectoryUtilities.createDirectoryStructure(forName: name)
 
     try FileOperations.newProjectOperations(paths: paths).perform()
 
