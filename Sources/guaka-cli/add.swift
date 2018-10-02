@@ -75,7 +75,7 @@ private func execute(flags: Flags, args: [String]) {
     print("\nCheck the help for more info:")
     addCommand.fail(statusCode: 1)
   } catch {
-    print("General error occured".f.red)
+    print("General error occured".f.Red)
     print("\nCheck the help for more info:")
     addCommand.fail(statusCode: 1)
   }
@@ -84,17 +84,17 @@ private func execute(flags: Flags, args: [String]) {
 private func printAddSuccess(setupFile: String, commandFile: String, projectName: String, commandName: String) {
   let message = [
     "A new swift file with the Command has been created at:",
-    "  \(commandFile)".f.green,
+    "  \(commandFile)".f.Green,
     "",
     "Setup swift file has been updated at:",
-    "  \(setupFile)".f.green,
+    "  \(setupFile)".f.Green,
     "",
     "Next steps:",
-    "  - Build the project with `\("swift build".s.italic)`",
-    "    The binary built will be placed under `\(".build/[debug|release]/\(projectName)".s.underline)`",
+    "  - Build the project with `\("swift build".s.Italic)`",
+    "    The binary built will be placed under `\(".build/[debug|release]/\(projectName)".s.Underline)`",
     "",
     "  - Test the command added, you can run it with:",
-    "    .build/debug/\(projectName) \(commandName)".s.italic,
+    "    .build/debug/\(projectName) \(commandName)".s.Italic,
     ]
 
   print(message.joined(separator: "\n"))

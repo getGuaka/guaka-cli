@@ -5,14 +5,13 @@
 //  Created by Omar Abdelhafith on 27/11/2016.
 //
 //
-import Swiftline
 
+import Colorizer
 
 public struct GuakaCliConfig {
   public static var dir: DirectoryType.Type = FileSystemDirectory.self
   public static var file: FileType.Type = FileSystemFile.self
 }
-
 
 public enum GuakaError: Error {
   case wrongDirectoryGiven(String)
@@ -34,19 +33,19 @@ public enum GuakaError: Error {
         "Wrong path given:",
         "  \(path)",
         "The path must be an empty directory"
-        ].joined(separator: "\n").f.red
+        ].joined(separator: "\n").f.Red
 
     case .triedToCreateProjectInNonEmptyDirectory(let path):
-      return "Cannot create project in non empty directory: \(path)\n".f.red
+      return "Cannot create project in non empty directory: \(path)\n".f.Red
 
     case .failedCreatingFolder(let path):
-      return "Failed creating directory \(path)".f.red
+      return "Failed creating directory \(path)".f.Red
 
     case .cannotCreateFile (let name):
-      return "Cannot generate \(name) file".f.red
+      return "Cannot generate \(name) file".f.Red
 
     case .cannotReadFile(let path):
-      return "Cannot read contents of file \(path)".f.red
+      return "Cannot read contents of file \(path)".f.Red
 
     case .setupFileAltered:
       return """
@@ -56,26 +55,26 @@ public enum GuakaError: Error {
 
       \(GeneratorParts.setupFileContent())
       Adding command won't be possible."
-      """.f.red
+      """.f.Red
 
     case .notAGuakaProject:
-      return "This command can only be executed inside a Guaka project.".f.red
+      return "This command can only be executed inside a Guaka project.".f.Red
 
     case .missingCommandName:
       return [
-        "Missing CommandName for `guaka add`.".f.red,
+        "Missing CommandName for `guaka add`.".f.Red,
         "",
         "Call `guaka add CommandName` to create a new command.",
         ""
         ].joined(separator: "\n")
 
     case .commandAlreadyExist(let name, let path):
-      return [ "The command `\(name)` already exist:".f.red,
-               "  \(path)".f.red,
+      return [ "The command `\(name)` already exist:".f.Red,
+               "  \(path)".f.Red,
                "Please use a differnt command name"].joined(separator: "\n")
 
     case .wrongCommandNameFormat(let name):
-      return [ "The command name passed `\(name)` is incorrect.".f.red,
+      return [ "The command name passed `\(name)` is incorrect.".f.Red,
         "Please use only letters, numbers, underscodes and dashes.",
         "",
         "Valid examples:",
@@ -86,7 +85,7 @@ public enum GuakaError: Error {
         "   guaka new myCommand"].joined(separator: "\n")
 
     case .tooManyArgsPassed:
-      return "Too many arguments passed to command.".f.red
+      return "Too many arguments passed to command.".f.Red
 
     }
 

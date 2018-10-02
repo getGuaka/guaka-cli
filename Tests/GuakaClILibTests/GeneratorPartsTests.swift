@@ -129,7 +129,7 @@ class GeneratorPartsTests: XCTestCase {
         }
 
         Adding command won't be possible."
-        """.f.red)
+        """.f.Red)
     } catch {
       XCTFail()
     }
@@ -167,7 +167,7 @@ class GeneratorPartsTests: XCTestCase {
       _ = try GeneratorParts.commandName(forPassedArgs: [])
     } catch let e as GuakaError {
       XCTAssertEqual(e.error, [
-        "Missing CommandName for `guaka add`.".f.red,
+        "Missing CommandName for `guaka add`.".f.Red,
         "",
         "Call `guaka add CommandName` to create a new command.",
         ""
@@ -181,7 +181,7 @@ class GeneratorPartsTests: XCTestCase {
     do {
       _ = try GeneratorParts.commandName(forPassedArgs: ["a", "b"])
     } catch let e as GuakaError {
-      XCTAssertEqual(e.error, "Too many arguments passed to command.".f.red)
+      XCTAssertEqual(e.error, "Too many arguments passed to command.".f.Red)
     } catch {
       XCTFail()
     }
@@ -191,7 +191,7 @@ class GeneratorPartsTests: XCTestCase {
     do {
       _ = try GeneratorParts.commandName(forPassedArgs: ["abc def"])
     } catch let e as GuakaError {
-      XCTAssertEqual(e.error, "The command name passed `abc def` is incorrect.".f.red + "\nPlease use only letters, numbers, underscodes and dashes.\n\nValid examples:\n   guaka new test\n   guaka new MyCommand\n   guaka new my-command\n   guaka new my_command\n   guaka new myCommand")
+      XCTAssertEqual(e.error, "The command name passed `abc def` is incorrect.".f.Red + "\nPlease use only letters, numbers, underscodes and dashes.\n\nValid examples:\n   guaka new test\n   guaka new MyCommand\n   guaka new my-command\n   guaka new my_command\n   guaka new myCommand")
     } catch {
       XCTFail()
     }
