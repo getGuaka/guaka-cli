@@ -11,6 +11,9 @@ test-darwin: generate
 test-linux:
 	swift test
 
+test-linux-docker:
+	docker run --volume `pwd`:`pwd` --workdir `pwd` swift:4.2 swift test
+
 coverage:
 	slather coverage guaka-cli.xcodeproj
 

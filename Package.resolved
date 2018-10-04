@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/getGuaka/Args.git",
         "state": {
           "branch": null,
-          "revision": "7500b7c15d3673601ed0db6ac11a491f0fc23686",
-          "version": "0.1.0"
+          "revision": "f58452117e865bf1b7c6fc29a4368e207c1f5c24",
+          "version": "0.1.1"
         }
       },
       {
@@ -33,8 +33,8 @@
         "repositoryURL": "https://github.com/nsomar/Guaka.git",
         "state": {
           "branch": null,
-          "revision": "1c1de0f89f202d87d20d568559efb6cc6c7d9f10",
-          "version": "0.2.0"
+          "revision": "7d6135f0bcb324977698c40a1985f481899b6dce",
+          "version": "0.3.1"
         }
       },
       {
@@ -69,8 +69,8 @@
         "repositoryURL": "https://github.com/getGuaka/Run.git",
         "state": {
           "branch": null,
-          "revision": "1810fa3aa7f84ecffa695792b13ecd22472881f1",
-          "version": "0.1.0"
+          "revision": "5a2866c0ae4266e0406d85f16adf65a30a626d7f",
+          "version": "0.1.1"
         }
       },
       {
